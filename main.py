@@ -1,12 +1,13 @@
 import random
+from typing import List
 
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 
-from Point import Point
-from Neuron import Neuron
 from Kohonen import *
-import matplotlib.pyplot as plt
+from Neuron import Neuron
+from Point import Point
 
 
 def generatePoints(numOfPoints: int):
@@ -16,10 +17,10 @@ def generatePoints(numOfPoints: int):
     return lst
 
 
-def generateNeurons(points: List[Point], numOfPoints: int, numOfNeurons: int):
+def generateNeurons(numOfNeurons: int):
     lst = []
     for i in range(numOfNeurons):
-        lst.append(Neuron(Point(0.5, random.random()), numOfPoints))
+        lst.append(Neuron(Point(random.random(), random.random())))
     return lst
 
 
@@ -27,8 +28,8 @@ def main():
     numOfPoints = 1000
     numOfNeurons = 100
     points = generatePoints(numOfPoints)
-    neurons = generateNeurons(numOfPoints, numOfNeurons)
-    neurons = kohonenAlgoFit(points, neurons)
+    neurons = generateNeurons(numOfNeurons)
+    neurons = kohonenFit(points, neurons)
 
     pointsX = np.zeros(numOfPoints)
     for i in range(numOfPoints):

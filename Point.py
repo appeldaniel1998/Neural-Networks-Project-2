@@ -1,4 +1,3 @@
-import random
 import numpy as np
 
 
@@ -15,3 +14,6 @@ class Point:
 
     def distance(self, other) -> float:
         return np.sqrt((self.getX() - other.getX()) ** 2 + (self.getY() - other.getY()) ** 2)
+
+    def __sub__(self, other):
+        return self.x - other.x, self.y - other.y
