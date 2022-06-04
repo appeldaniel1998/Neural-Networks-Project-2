@@ -23,6 +23,28 @@ def generatePointsUniform(numOfPoints: int):
     return lst
 
 
+def generatePointsNonUniform(numOfPoints: int):
+    """
+    Function create UnUniform distributed data such that:
+    half of the data will be uniform distributed between x,y values of 0-1,
+    quarter of the data will be distributed  between x,y values of (0-1)/3
+    quarter of the data will be distributed  between x,y values of (1-(0-1))/3
+
+    :param numOfPoints:desired numbers of data points
+    :return: list of the data point
+    """
+    lst = []
+    quarter_data = numOfPoints // 4
+    half_data = numOfPoints // 2
+    for i in range(quarter_data):
+        lst.append(Point(random.random() / 3, random.random() / 3))
+    for i in range(quarter_data):
+        lst.append(Point(1 - random.random() / 3, 1 - random.random() / 3))
+    for i in range(half_data):
+        lst.append(Point(random.random(), random.random()))
+    return lst
+
+
 def generatePointsCircle(numOfPoints: int):
     """
     Function create distributed data as required in question number 2,when x,y values between  {<x.y> | 2<= x^2 +y^2 <= 4}
