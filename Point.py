@@ -16,4 +16,4 @@ class Point:
         return np.sqrt((self.getX() - other.getX()) ** 2 + (self.getY() - other.getY()) ** 2)
 
     def __sub__(self, other):
-        return self.x - other.x, self.y - other.y
+        return [self.x - other.x, self.y - other.y]
