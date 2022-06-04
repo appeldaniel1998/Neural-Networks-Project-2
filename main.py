@@ -52,11 +52,19 @@ def generatePointsCircle(numOfPoints: int):
     :return: list of the data point
     """
     lst = []
+    # for i in range(numOfPoints):
+    #     x = random.random() *2 # take random number between 0 to 2
+    #     y = math.sqrt(4-(x**2))
+    #     point = Point(x,y)
+    #     lst.append(point)
+    # return lst
+
     for i in range(numOfPoints):
-        x = random.random() *2 # take random number between 0 to 2
-        y = math.sqrt(4-(x**2))
-        point = Point(x,y)
-        lst.append(point)
+        alpha = 2 * math.pi * random.random()
+        r = 2 * math.sqrt(random.random()) + 2
+        x = r * math.cos(alpha)
+        y = r * math.sin(alpha)
+        lst.append(Point(x, y))
     return lst
 
 
@@ -88,15 +96,15 @@ def generateNeurons2D(numOfNeurons: int):
 
 
 def main():
-    numOfPoints = 100  # Define number od data points
+    numOfPoints = 1000  # Define number od data points
     numOfNeurons = 100  # Define number of neurons
     # points = generatePointsUniform(numOfPoints)  # For uniform
     # points = generatePointsNonUniform(numOfPoints)  # For non-uniform
-    points = generatePointsCircle(numOfPoints) # For circle
-    # neurons = generateNeurons1D(numOfNeurons)  # For 1D
-    neurons = generateNeurons2D(numOfNeurons)  # For 2D
-    # neurons = Kohonen1D.kohonenFit(points, neurons)  # For 1D
-    neurons = Kohonen2D.kohonenFit(points, neurons)  # For 2D
+    points = generatePointsCircle(numOfPoints)  # For circle
+    neurons = generateNeurons1D(numOfNeurons)  # For 1D
+    # neurons = generateNeurons2D(numOfNeurons)  # For 2D
+    neurons = Kohonen1D.kohonenFit(points, neurons)  # For 1D
+    # neurons = Kohonen2D.kohonenFit(points, neurons)  # For 2D
 
     # To perform scatter graph of the data points and the neurons after training, we will create DF of X and Y values of data points and neurons locations
     pointsX = np.zeros(numOfPoints)
