@@ -52,12 +52,6 @@ def generatePointsCircle(numOfPoints: int):
     :return: list of the data point
     """
     lst = []
-    # for i in range(numOfPoints):
-    #     x = random.random() *2 # take random number between 0 to 2
-    #     y = math.sqrt(4-(x**2))
-    #     point = Point(x,y)
-    #     lst.append(point)
-    # return lst
 
     for i in range(numOfPoints):
         alpha = 2 * math.pi * random.random()
