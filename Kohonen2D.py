@@ -14,10 +14,10 @@ def kohonenFit(points: List[Point], neurons: List[List[Neuron]]):
     :param neurons:List of neurons locations
     :return:List of neurons with updated locations
     """
-    learningRate = 0.7
-    radius = 7
+    learningRate = 0.4
+    radius = 6
 
-    for epoch in range(100):
+    for epoch in range(10):
         for pointInd in range(len(points)):  # For each datapoint
             currPoint = points[pointInd]
             closestNeuronInd = -1
@@ -59,9 +59,9 @@ def kohonenFit(points: List[Point], neurons: List[List[Neuron]]):
                     if distanceBetweenNeurons < len(gaussKer):
                         changeInPosX = diff[0] * tempLearningRate * gaussKer[distanceBetweenNeurons]
                         changeInPosY = diff[1] * tempLearningRate * gaussKer[distanceBetweenNeurons]
+                        currNeuron.changePoint(changeInPosX, changeInPosY)  # Define the new location of the neuron according to the location change we found
                     else:
                         continue
-                    currNeuron.changePoint(changeInPosX, changeInPosY)  # Define the new location of the neuron according to the location change we found
         radius *= 0.8  # Decrease the radius
 
     return neurons

@@ -4,6 +4,7 @@ import cv2
 
 from Neuron import Neuron
 from Point import Point
+from main import printGraph
 
 
 def kohonenFit(points: List[Point], neurons: List[Neuron]):
@@ -14,9 +15,10 @@ def kohonenFit(points: List[Point], neurons: List[Neuron]):
     :param neurons: List of neurons locations
     :return: List of neurons with updated locations
     """
-    learningRate = 0.2
+    learningRate = 0.4
     radius = 30
 
+    printGraph(points, len(points), neurons, len(neurons))
     for epoch in range(10):
         for pointInd in range(len(points)):  # For each datapoint
             currPoint = points[pointInd]
@@ -54,5 +56,6 @@ def kohonenFit(points: List[Point], neurons: List[Neuron]):
                 changeInPosY = diff[1] * tempLearningRate * gaussKer[distanceBetweenNeurons]
                 currNeuron.changePoint(changeInPosX, changeInPosY)  # Define the new location of the neuron according to the location change we found
         radius *= 0.5  # Decrease the radius
+        printGraph(points, len(points), neurons, len(neurons))
 
     return neurons

@@ -2,8 +2,8 @@ import math
 import random
 
 import numpy as np
-import pandas as pd
 from matplotlib import pyplot as plt
+import pandas as pd
 
 import Kohonen1D
 import Kohonen2D
@@ -55,7 +55,7 @@ def generatePointsCircle(numOfPoints: int):
 
     for i in range(numOfPoints):
         alpha = 2 * math.pi * random.random()
-        r = 2 * math.sqrt(random.random()) + 2
+        r = np.sqrt(2) * math.sqrt(random.random()) + np.sqrt(2)
         x = r * math.cos(alpha)
         y = r * math.sin(alpha)
         lst.append(Point(x, y))
@@ -74,6 +74,18 @@ def generateNeurons1D(numOfNeurons: int):
     return lst
 
 
+def generateNeuronsCircle(numOfNeurons: int):
+    """
+    Function define 1D array of neuron in given size
+    :param numOfNeurons:desired numbers of neurons
+    :return:list of the neurons
+    """
+    lst = []
+    for i in range(numOfNeurons):
+        lst.append(Neuron(Point(random.random() * 6 - 3, random.random() * 6 - 3)))
+    return lst
+
+
 def generateNeurons2D(numOfNeurons: int):
     """
     Function define 2D array of neuron in given size
@@ -81,25 +93,15 @@ def generateNeurons2D(numOfNeurons: int):
     :return:list of the neurons
     """
     lst = []
-    for i in range(10):
+    for i in range(15):
         tempLst = []
-        for j in range(int(numOfNeurons / 10)):
-            tempLst.append(Neuron(Point(random.random(), random.random())))
+        for j in range(15):
+            tempLst.append(Neuron(Point(i / 15, j / 15)))
         lst.append(tempLst)
     return lst
 
 
-def main():
-    numOfPoints = 1000  # Define number od data points
-    numOfNeurons = 100  # Define number of neurons
-    # points = generatePointsUniform(numOfPoints)  # For uniform
-    # points = generatePointsNonUniform(numOfPoints)  # For non-uniform
-    points = generatePointsCircle(numOfPoints)  # For circle
-    neurons = generateNeurons1D(numOfNeurons)  # For 1D
-    # neurons = generateNeurons2D(numOfNeurons)  # For 2D
-    neurons = Kohonen1D.kohonenFit(points, neurons)  # For 1D
-    # neurons = Kohonen2D.kohonenFit(points, neurons)  # For 2D
-
+def printGraph(points, numOfPoints, neurons, numOfNeurons):
     # To perform scatter graph of the data points and the neurons after training, we will create DF of X and Y values of data points and neurons locations
     pointsX = np.zeros(numOfPoints)
     for i in range(numOfPoints):
@@ -123,6 +125,34 @@ def main():
     plt.scatter(dfPoints[0], dfPoints[1])
     plt.scatter(dfNeurons[0], dfNeurons[1])
     plt.show()
+
+
+def main():
+    numOfPoints = 1000  # Define number od data points
+    numOfNeurons = 225  # Define number of neurons
+
+    points = generatePointsUniform(numOfPoints)  # For uniform
+    # points = generatePointsNonUniform(numOfPoints)  # For non-uniform
+
+    # points = generatePointsCircle(numOfPoints)  # For circle
+    # neurons = generateNeuronsCircle(numOfNeurons)  # For Circle
+
+    # neurons = generateNeurons1D(numOfNeurons)  # For 1D
+    # neurons = Kohonen1D.kohonenFit(points, neurons)  # For 1D
+
+    neurons = generateNeurons2D(numOfNeurons)  # For 2D
+    neurons = Kohonen2D.kohonenFit(points, neurons)  # For 2D
+
+    # for full monkey finger
+    # black_list = monkeyHandPoints.createHandMatrix(img_path)
+    # points = monkeyHandPoints.lotteryPoints(black_list, numOfPoints)
+    # neurons = generateNeurons2D(numOfNeurons)  # For 2D
+
+    # printGraph(points, numOfPoints, neurons, numOfNeurons)
+
+    neurons = Kohonen2D.kohonenFit(points, neurons)  # For 2D
+
+    printGraph(points, numOfPoints, neurons, numOfNeurons)
 
 
 if __name__ == '__main__':
