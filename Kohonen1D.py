@@ -44,7 +44,7 @@ def kohonenFit(points: List[Point], neurons: List[Neuron]):
             gaussKer /= gaussKer[0]
 
             # For all neighbours in the range of the min & max we found beforehand
-            for neighbourInd in range(minNeigh, maxNeigh):
+            for neighbourInd in range(minNeigh, maxNeigh + 1):
                 # move the neighbours according to normalized gaussian distribution
                 currNeuron = neurons[neighbourInd]
                 distanceBetweenNeurons = abs(neighbourInd - closestNeuronInd)

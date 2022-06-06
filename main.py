@@ -9,6 +9,7 @@ import Kohonen1D
 import Kohonen2D
 from Neuron import Neuron
 from Point import Point
+import monkeyHandPoints
 
 
 def generatePointsUniform(numOfPoints: int):
@@ -128,6 +129,13 @@ def printGraph(points, numOfPoints, neurons, numOfNeurons):
 
 
 def main():
+    random.seed(1)
+    img_path = 'Hand Pics/handPicFull.png'
+    ######################### black_list=monkeyHandPoints.createHandMatrix(img_path)
+    ########################## print("black_list:",black_list)
+    ########################## random_points=monkeyHandPoints.lotteryPoints(black_list,10)
+    ############################ print("random_points:",random_points)
+
     numOfPoints = 1000  # Define number od data points
     numOfNeurons = 225  # Define number of neurons
 
